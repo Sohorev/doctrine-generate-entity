@@ -1,0 +1,6 @@
+quest:
+  errors:
+    name:
+      not_blank: 'Заполните ваше имя'
+    phone:
+      not_blank: 'Заполните ваш телефон'

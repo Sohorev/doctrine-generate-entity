@@ -1,0 +1,34 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: localhost
+    database_port: 3306
+    database_name: skyeng_production
+    database_user: skyeng_main
+    database_password: skyeng_main
+
+    database_auth_driver: pdo_pgsql
+    database_auth_host: 127.0.0.1
+    database_auth_port: null
+    database_auth_name: auth
+    database_auth_user: skyeng_auth
+    database_auth_password: skyeng_auth
+
+
+    app_control.base_domain: skyeng.loc
+    session.cookie_domain: .%app_control.base_domain%
+    session.storage.redis.dsn: 'redis://localhost'
+    session.ttl: 86400
+    session.cookie_name: skyeng.loc
+    global_session_cookie_name: session_global
+#    sentry_dsn: ''
+    memcache_prefix: generator
+    memcache_servers:
+        -
+            - 127.0.0.1
+            - 11211
+
+
+    # A secret key that's used to generate certain security-related tokens
+    secret: ThisTokenIsNotSoSecretChangeIt

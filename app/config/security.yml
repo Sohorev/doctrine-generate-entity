@@ -1,0 +1,34 @@
+security:
+
+  providers:
+    my_in_memory_provider:
+      memory:
+        users:
+          foo:
+            password:           foo
+            roles:              ROLE_USER
+          bar:
+            password:           bar
+            roles:              [ROLE_USER, ROLE_ADMIN]
+#    user_by_id:
+#      user_from_entity:
+#        property: id
+#    user_by_identity:
+#      user_from_entity:
+#        property: identity
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+#    default:
+#      pattern: ^/
+#      anonymous: ~
+#      external_session:
+#        external_session_owners:
+#          skyeng_main:
+#            cookie_name: '%global_session_cookie_name%'
+#            check_url: "https://id.%app_control.base_domain%/api/v1/session"
+#        token_update_interval: 600
+#        login_path: 'https://id.%app_control.base_domain%/login'

@@ -1,0 +1,101 @@
+imports:
+  - { resource: parameters.yml }
+  - { resource: security.yml }
+  - { resource: services.yml }
+  - { resource: parameters_add.php }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  locale: en
+
+framework:
+  #esi: ~
+  #translator: { fallbacks: ['%locale%'] }
+  secret: '%secret%'
+  router:
+    resource: '%kernel.project_dir%/app/config/routing.yml'
+    strict_requirements: ~
+  form: ~
+  csrf_protection: ~
+  default_locale: ru
+  translator: { fallbacks: [en] }
+  validation: { enable_annotations: true }
+  #serializer: { enable_annotations: true }
+  templating:
+      engines: ['twig']
+  default_locale: '%locale%'
+  trusted_hosts: ~
+  session:
+    # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+    handler_id: session.handler.native_file
+    save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+  fragments: ~
+  http_method_override: true
+  assets: ~
+  php_errors:
+    log: true
+#  cache:
+#    default_memcached_provider: "%memcached.dsn%"
+#    pools:
+#      app.cache.items:
+#        adapter: cache.adapter.memcached
+#        public: true
+  cache: ~
+
+# Twig Configuration
+twig:
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+
+# Doctrine Configuration
+doctrine:
+  dbal:
+    default_connection: skyeng_main
+    types:
+
+    connections:
+      skyeng_main:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        server_version: 5.5
+        charset:  UTF8
+        mapping_types:
+          enum: string
+          json: string
+          jsonb: string
+#      auth:
+#        # Если мы логинемся, то этот конекшен используется, ExternalSessionProvider::authenticate делает выборку именно из базы
+#        driver:   "%database_auth_driver%"
+#        host:     "%database_auth_host%"
+#        port:     "%database_auth_port%"
+#        dbname:   "%database_auth_name%"
+#        user:     "%database_auth_user%"
+#        password: "%database_auth_password%"
+#        charset:  UTF8
+  orm:
+    auto_generate_proxy_classes: '%kernel.debug%'
+    default_entity_manager: skyeng_main
+    entity_managers:
+# База пока не используется
+      skyeng_main:
+        connection: skyeng_main
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: false
+        mappings:
+          SkyengMainBundle:
+            mapping: true
+            type: xml
+            dir: %kernel.root_dir%/../src/SkyengMainBundle/Resources/config/doctrine
+            is_bundle: false
+            prefix: SkyengMainBundle\Entity
+#      auth:
+#        connection: auth
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
+#        mappings:
+#          AuthBundle: ~
+
